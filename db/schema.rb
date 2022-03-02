@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_01_202922) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_02_123627) do
+  create_table "buildings", force: :cascade do |t|
+    t.string "name"
+    t.string "adress"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -21,4 +28,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_01_202922) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "room_items", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_room_items_on_item_id"
+    t.index ["room_id"], name: "index_room_items_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "building_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_rooms_on_building_id"
+  end
+
+  add_foreign_key "room_items", "items"
+  add_foreign_key "room_items", "rooms"
+  add_foreign_key "rooms", "buildings"
 end

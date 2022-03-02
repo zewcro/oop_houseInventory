@@ -1,7 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @item %>
-
+<p>
+<strong> Rooms :</strong>>
+  <%- @item.rooms.each do |room| %>
+  <%=  room.name %>
+  <% end %>
+</p>
 <div>
   <%= link_to "Edit this item", edit_item_path(@item) %> |
   <%= link_to "Back to items", items_path %>

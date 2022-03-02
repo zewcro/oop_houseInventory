@@ -37,6 +37,11 @@
   </div>
 
   <div>
+    <%= form.label :rooms, style: "display: block" %>
+    <%= form.select :room_ids, Room.all.collect {|x| [x.name, x.id]}, {}, :multiple => true  %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

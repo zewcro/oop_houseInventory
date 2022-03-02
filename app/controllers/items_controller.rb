@@ -22,8 +22,9 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
 
+    @item = Item.new(item_params)
+    
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
@@ -66,6 +67,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :weight, :length, :storage_detail)
+      params.require(:item).permit(:name, :description, :weight, :length, :storage_detail, :room_ids => [])
     end
 end
